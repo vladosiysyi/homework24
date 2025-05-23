@@ -1,0 +1,129 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "шляпы",
+        "description": "Мужикам они как раз. иногда как два"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Электроника",
+        "description": "Гаджеты и устройства"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Одежда",
+        "description": "Мужская и женская одежда"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+        "name": "Электроника",
+        "description": "Гаджеты и устройства"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+        "name": "Одежда",
+        "description": "Мужская и женская одежда"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+        "name": "Электроника",
+        "description": "Гаджеты и устройства"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+        "name": "Одежда",
+        "description": "Мужская и женская одежда"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 8,
+    "fields": {
+        "name": "Электроника",
+        "description": "Гаджеты и устройства"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 9,
+    "fields": {
+        "name": "Одежда",
+        "description": "Мужская и женская одежда"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "Смартфон",
+        "description": "Мощный смартфон",
+        "image": "",
+        "category": 2,
+        "price": "29999.00"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Смартфон",
+        "description": "Мощный смартфон",
+        "image": "",
+        "category": 4,
+        "price": "29999.00"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+        "name": "Смартфон",
+        "description": "Мощный смартфон",
+        "image": "",
+        "category": 6,
+        "price": "29999.00"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+        "name": "Смартфон",
+        "description": "Мощный смартфон",
+        "image": "",
+        "category": 8,
+        "price": "29999.00"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+        "name": "Футболка",
+        "description": "Белая футболка",
+        "image": "",
+        "category": 9,
+        "price": "999.00"
+    }
+}
+]
