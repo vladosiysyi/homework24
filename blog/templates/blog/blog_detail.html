@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ object.title }}</h1>
+  <p><strong>Дата публикации:</strong> {{ object.created_at|date:"d.m.Y" }}</p>
+  <p>{{ object.content }}</p>
+
+  {% if object.preview %}
+    <img src="{{ object.preview.url }}" alt="Preview" style="max-width: 300px;">
+  {% endif %}
+
+  <p><strong>Просмотров:</strong> {{ object.views }}</p>
+
+  <hr>
+  <a href="{% url 'blog_update' object.pk %}">Редактировать</a> |
+  <a href="{% url 'blog_delete' object.pk %}">Удалить</a> |
+  <a href="{% url 'blog_list' %}">Назад к списку</a>
+{% endblock %}

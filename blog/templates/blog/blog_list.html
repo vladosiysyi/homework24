@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Блог{% endblock %}
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Блог</h1>
+    <a href="{% url 'blog_create' %}" class="btn btn-success mb-3">Новая статья</a>
+    {% for post in posts %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h4><a href="{% url 'blog_detail' post.pk %}">{{ post.title }}</a></h4>
+                <p class="text-muted">{{ post.created_at|date:"d.m.Y H:i" }} | Просмотров: {{ post.views }}</p>
+                <p>{{ post.content|truncatewords:30 }}</p>
+            </div>
+        </div>
+    {% empty %}
+        <p>Нет опубликованных статей.</p>
+    {% endfor %}
+</div>
+{% endblock %}
