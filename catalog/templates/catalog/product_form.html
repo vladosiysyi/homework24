@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Форма продукта{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">{% if form.instance.pk %}Редактировать{% else %}Создать{% endif %} продукт</h2>
+
+<form method="post" enctype="multipart/form-data" class="needs-validation">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+        <div class="mb-3">
+    {{ field.label_tag }}
+    {{ field }}
+    {% if field.errors %}
+        <div class="text-danger">{{ field.errors }}</div>
+    {% endif %}
+</div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-success">Сохранить</button>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary">Назад</a>
+</form>
+{% endblock %}
