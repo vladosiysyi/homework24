@@ -2,6 +2,8 @@ from django.views.generic import (
     TemplateView, ListView, DetailView,
     CreateView, UpdateView, DeleteView
 )
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
 from .models import Product
@@ -29,14 +31,14 @@ class ProductDetailView(DetailView):
 
 
 # CRUD: список товаров
-class ProductListView(ListView):
+class ProductListView(LoginRequiredMixin, ListView):
     model = Product
     template_name = 'catalog/product_list.html'
     context_object_name = 'products'
 
 
 # CRUD: создание товара
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
@@ -44,7 +46,7 @@ class ProductCreateView(CreateView):
 
 
 # CRUD: обновление товара
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
@@ -52,7 +54,7 @@ class ProductUpdateView(UpdateView):
 
 
 # CRUD: удаление товара
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = 'catalog/product_confirm_delete.html'
     success_url = reverse_lazy('product_list')
