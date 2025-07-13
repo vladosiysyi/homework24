@@ -12,6 +12,15 @@
     <p><strong>Цена:</strong> {{ product.price }} ₽</p>
     <p><strong>Описание:</strong></p>
     <p>{{ product.description }}</p>
+
+    {# Кнопка "Снять с публикации" доступна, если пользователь имеет нужные права и товар опубликован #}
+    {% if perms.catalog.can_unpublish_product and product.status == "published" %}
+        <form method="post" action="{% url 'product_unpublish' pk=product.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning mt-3">Снять с публикации</button>
+        </form>
+    {% endif %}
+
     <a href="/" class="btn btn-primary mt-3">Назад к каталогу</a>
 </div>
 {% endblock %}

@@ -22,8 +22,12 @@
             <td>{{ product.category.name }}</td>
             <td>{{ product.price }} ₽</td>
             <td>
-                <a href="{% url 'product_update' product.pk %}" class="btn btn-sm btn-primary">Изменить</a>
-                <a href="{% url 'product_delete' product.pk %}" class="btn btn-sm btn-danger">Удалить</a>
+                {% if request.user == product.owner %}
+                    <a href="{% url 'product_update' product.pk %}" class="btn btn-sm btn-primary">Изменить</a>
+                {% endif %}
+                {% if request.user == product.owner or 'Модератор продуктов' in user_group_names %}
+                    <a href="{% url 'product_delete' product.pk %}" class="btn btn-sm btn-danger">Удалить</a>
+                {% endif %}
             </td>
         </tr>
         {% empty %}
