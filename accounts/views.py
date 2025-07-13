@@ -10,7 +10,7 @@ from .forms import CustomUserCreationForm
 class RegisterView(FormView):
     template_name = 'accounts/register.html'
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('home')  # замените на ваш url по имени
+    success_url = reverse_lazy('home') 
 
     def form_valid(self, form):
         user = form.save()
@@ -32,7 +32,7 @@ class RegisterView(FormView):
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
     redirect_authenticated_user = True
-    next_page = reverse_lazy('home')  # куда перенаправлять после логина
+    next_page = reverse_lazy('home') 
 
 # Выход пользователя
 class CustomLogoutView(LogoutView):
