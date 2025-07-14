@@ -5,6 +5,7 @@ from django.core.mail import send_mail,BadHeaderError
 import logging
 from django.contrib.auth import login
 from .forms import CustomUserCreationForm
+from django.conf import settings
 
 # Регистрация с отправкой письма
 class RegisterView(FormView):
@@ -21,7 +22,7 @@ class RegisterView(FormView):
     def send_welcome_email(self, user_email):
         subject = 'Добро пожаловать в наш сервис'
         message = 'Спасибо, что зарегистрировались в нашем сервисе!'
-        from_email = None
+        from_email = settings.EMAIL_HOST_USER
         recipient_list = [user_email]
         try:
             send_mail(subject, message, from_email, recipient_list)
