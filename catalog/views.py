@@ -7,16 +7,42 @@ from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseForbidden
 from django.views import View
-
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
+from .models import Category
 from .models import Product
 from .forms import ProductForm
+from .services import get_products_by_category
+from django.core.cache import cache
 
+class ProductsByCategoryView(TemplateView):
+    template_name = 'catalog/products_by_category.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_id = self.kwargs.get('category_id')
+        category = get_object_or_404(Category, id=category_id)
+        products = get_products_by_category(category_id)
+        context['category'] = category
+        context['products'] = products
+        return context
 
 # Главная страница с товарами
 class HomeView(ListView):
     model = Product
     template_name = 'home.html'
     context_object_name = 'products'
+
+    def get_queryset(self):
+        # Пробуем получить продукты из кеша
+        products = cache.get('all_products')
+
+        if products is None:
+            # Если в кеше нет — получаем из БД и сохраняем в кеш
+            products = Product.objects.filter(status='published')
+            cache.set('all_products', products, 60 * 5)  # Кеш на 5 минут
+
+        return products
 
 
 # Страница "Контакты"
@@ -25,6 +51,7 @@ class ContactsView(TemplateView):
 
 
 # Страница одного товара
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'product_detail.html'
